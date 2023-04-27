@@ -1,7 +1,8 @@
 import Story from "./story.js";
 
-const s = new Story();
-s.startChain();
+const s = new Story(1000);
+s.addChain(1001);
+s.addChain(1002);
 s.start(async (page: any) => {
   await page.goto("http://localhost:8000");
   await page.click("#connect");

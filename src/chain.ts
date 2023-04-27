@@ -1,24 +1,32 @@
 import ganache, { Server } from "ganache";
 
+let nextChainPort = 8545;
+
 export default class Chain {
   public server: Server;
   public provider: any;
+  public chainId: number;
+  public port: number;
 
-  constructor() {
-    this.server = ganache.server();
+  constructor(chainId: number) {
+    this.chainId = chainId;
+    this.port = nextChainPort++;
+
+    const options = {
+      chainId: this.chainId,
+    };
+
+    this.server = ganache.server(options);
     this.provider = this.server.provider;
     console.log("provider", this.provider);
   }
 
   start() {
-    const options = {};
-    const server = ganache.server(options);
-    const PORT = 8545;
     console.log("starting");
-    server
-      .listen(PORT)
+    this.server
+      .listen(this.port)
       .then(() => {
-        console.log(`ganache listening on port ${PORT}...`);
+        console.log(`chain ${this.chainId} on port ${this.port}...`);
         console.log("provider", this.provider);
 
         this.provider

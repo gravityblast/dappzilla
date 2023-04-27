@@ -9,9 +9,10 @@
   },
   "dependencies": {
     "ganache": "^7.5.0",
-    "puppeteer": "^19.2.2"
+    "playwright": "^1.33.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.33.0",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",
