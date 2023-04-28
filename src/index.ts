@@ -5,7 +5,8 @@ s.addChain(1001);
 s.addChain(1002);
 s.start(async (page: any) => {
   await page.goto("http://localhost:8000");
-  await page.click("#connect");
+  await page.click("#btnConnect");
+  await page.click("#btnSendEth");
 });
 
 // (async () => {
