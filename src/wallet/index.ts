@@ -1,4 +1,4 @@
-import Chain from "./chain.js";
+import Chain from "../chain/index.js";
 import { RPCRProvideRequestArguments } from "./types.js";
 
 export default class Wallet {

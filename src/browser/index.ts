@@ -1,7 +1,7 @@
 import { chromium, devices, Browser, BrowserContext } from "playwright";
 
-import Chain from "./chain.js";
-import Wallet from "./wallet.js";
+import Chain from "../chain/index.js";
+import Wallet from "../wallet/index.js";
 // import { RPCRProvideRequestArguments } from "./types.js";
 
 const __ethRequest = (args: any) => {};

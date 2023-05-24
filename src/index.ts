@@ -1,6 +1,6 @@
-import Story from "./story.js";
+import Runner from "./runner/index.js";
 
-const s = new Story({ defaultWalletChainId: 1 });
+const s = new Runner({ defaultWalletChainId: 1 });
 const chain1 = s.addChain(1001);
 const chain2 = s.addChain(1002);
 

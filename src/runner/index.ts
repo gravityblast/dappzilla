@@ -1,17 +1,17 @@
-import Chain from "./chain.js";
-import Browser from "./browser.js";
+import Chain from "../chain/index.js";
+import Browser from "../browser/index.js";
 
 export type StoryOptions = {
   defaultWalletChainId: number;
 };
 
-export class StoryError extends Error {
+export class RunnerError extends Error {
   constructor(...args: any[]) {
     super(...args);
   }
 }
 
-export default class Story {
+export default class Runner {
   public chains: { [chainId: number]: Chain };
   public browserWalletChainId: number;
 
@@ -27,7 +27,7 @@ export default class Story {
 
   addChain(chainId: number) {
     if (this.chains[chainId] !== undefined) {
-      throw new StoryError(`chainId ${chainId} already added`);
+      throw new RunnerError(`chainId ${chainId} already added`);
     }
 
     const chain = new Chain({ chainId });
