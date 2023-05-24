@@ -52,6 +52,34 @@ export default class BrowserWrapper {
     }
 
     const page = await this.context.newPage();
+
+    page.route("**", (route) => {
+      const req = route.request();
+
+      if (
+        new RegExp("^https://rum.browser-intake-datadoghq.eu").test(
+          req.url()
+        ) ||
+        new RegExp("intercom").test(req.url())
+      ) {
+        route.abort();
+        return;
+      }
+
+      if (new RegExp("mainnet").test(req.url())) {
+        route.abort();
+        return;
+      }
+
+      console.log(
+        "------------------------------",
+        req.url(),
+        req.method(),
+        req.postData()
+      );
+      route.continue();
+    });
+
     await page.exposeBinding("__ethRequest", (_binding, args) => {
       return this.wallet.request(args);
     });

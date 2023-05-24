@@ -2,21 +2,26 @@ import ganache, { Server } from "ganache";
 
 let nextChainPort = 8545;
 
+export type ChainOptions = {
+  chainId: number;
+};
+
 export default class Chain {
   public server: Server;
   public provider: any;
   public chainId: number;
   public port: number;
 
-  constructor(chainId: number) {
-    this.chainId = chainId;
+  constructor(options: ChainOptions) {
+    this.chainId = options.chainId;
+    // FIXME: check that next port has not been used with a custom chain
     this.port = nextChainPort++;
 
-    const options = {
+    const serverOptions = {
       chainId: this.chainId,
     };
 
-    this.server = ganache.server(options);
+    this.server = ganache.server(serverOptions);
     this.provider = this.server.provider;
     console.log("provider", this.provider);
   }

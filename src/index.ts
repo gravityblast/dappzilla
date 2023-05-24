@@ -1,12 +1,15 @@
 import Story from "./story.js";
 
-const s = new Story(1000);
-s.addChain(1001);
-s.addChain(1002);
+const s = new Story({ defaultWalletChainId: 1 });
+const chain1 = s.addChain(1001);
+const chain2 = s.addChain(1002);
+
 s.start(async (page: any) => {
-  await page.goto("http://localhost:8000");
-  await page.click("#btnConnect");
-  await page.click("#btnSendEth");
+  // await page.goto("http://localhost:8000");
+  // await page.click("#btnConnect");
+  // await page.click("#btnSendEth");
+
+  await page.goto("https://builder.gitcoin.co");
 });
 
 // (async () => {
