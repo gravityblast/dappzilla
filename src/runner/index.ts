@@ -1,5 +1,6 @@
 import Chain from "../chain/index.js";
 import Browser from "../browser/index.js";
+import { Page } from "playwright";
 
 export type StoryOptions = {
   defaultWalletChainId: number;
@@ -10,6 +11,8 @@ export class RunnerError extends Error {
     super(...args);
   }
 }
+
+type RunCallback = (page: Page) => void;
 
 export default class Runner {
   public chains: { [chainId: number]: Chain };
@@ -37,7 +40,7 @@ export default class Runner {
     return chain;
   }
 
-  async run(cb: any) {
+  async run(callback: RunCallback) {
     for (const chainId in this.chains) {
       const chain = this.chains[chainId];
       chain.start();
@@ -46,6 +49,6 @@ export default class Runner {
     await this.browser.start();
     const page = await this.browser.newPage();
 
-    cb(page);
+    callback(page);
   }
 }
