@@ -1,15 +1,25 @@
 import Runner from "./runner/index.js";
 
-const s = new Runner({ defaultWalletChainId: 1 });
-const chain1 = s.addChain(1001);
-const chain2 = s.addChain(1002);
+const runner = new Runner({ defaultWalletChainId: 1 });
+const chain1 = runner.addChain(1001);
+const chain2 = runner.addChain(1002);
+const wallet = runner.browser.wallet;
 
-s.start(async (page: any) => {
+runner.run(async (page: any) => {
   // await page.goto("http://localhost:8000");
   // await page.click("#btnConnect");
   // await page.click("#btnSendEth");
 
   await page.goto("https://builder.gitcoin.co");
+  const connectButton = await page.waitForSelector("header button");
+  await connectButton.click();
+
+  wallet.grantAccountsPermission();
+
+  const mmButton = await page.waitForSelector(
+    "//div[contains(text(), 'MetaMask')]"
+  );
+  await mmButton.click();
 });
 
 // (async () => {
